@@ -18,7 +18,7 @@ pipeline {
         AWS_ACCOUNT_ID = credentials('ACCOUNT_ID')
         AWS_ECR_FRONTEND_REPO_NAME = credentials('ECR_REPO1')
         AWS_ECR_BACKEND_REPO_NAME = credentials('ECR_REPO2')
-        AWS_DEFAULT_REGION = 'us-east-1'
+        AWS_DEFAULT_REGION = 'us-west-2'
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/"
         NVD_API_KEY = credentials('nvd-api-key')
     }
@@ -250,7 +250,7 @@ pipeline {
                             deploymentBackend = 'backend-deployment-green.yml' 
                         }
 
-                        withKubeConfig(caCertificate: '', clusterName: 'devopsshack-cluster', credentialsId: 'k8-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://EFCD6C924B0CADA4EF47D2E578265EFC.gr7.us-east-1.eks.amazonaws.com') {
+                        withKubeConfig(caCertificate: '', clusterName: 'devopsshack-cluster', credentialsId: 'k8-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://69D09004D548432DDF0328042A340CB2.gr7.us-west-2.eks.amazonaws.com') {
                             sh "kubectl apply -f ${deploymentBackend} --record -n ${KUBE_NAMESPACE}"
                             sh "kubectl apply -f ${deploymentFrontend} --record -n ${KUBE_NAMESPACE}"
                             sh "sleep 20"
